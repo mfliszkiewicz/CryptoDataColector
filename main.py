@@ -1,15 +1,17 @@
-from selenium import webdriver
+import requests
+import pandas as pd
 
-url = "https://www.viewbase.com/exchange"
-PATH = r"C:\Users\WONSZ\PycharmProjects\CryptoDataColector\drivers\chromedriver.exe"
-browser = webdriver.Chrome(PATH)
+request = requests.get("https://api.viewbase.com/exchange").text
 
-browser.get("https://www.viewbase.com/exchange")
-print(browser.title)
-browser.quit()
-# ViewbaseExchangeFlow = requests.get(url).text
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
 
-# soup = BeautifulSoup(ViewbaseExchangeFlow, 'lxml')
-# tr_elements = soup.find_all('tr', class_='exchange_overview_row clickable-row')
+data = pd.read_json(request)
 
-# print(tr_elements)
+
+
+print(data)
+
+
+
